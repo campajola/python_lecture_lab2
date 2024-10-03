@@ -1,4 +1,6 @@
-def fit_lineare_pesato(x,y,w) :
+import numpy as np
+
+def fit_lineare_pesato(x,y,w, verbose=True) :
     """
     questa funzione calcola i parametri della retta di best fit y = a + b*x 
     usando le formule dei minimi quadrati pesati.
@@ -20,9 +22,11 @@ def fit_lineare_pesato(x,y,w) :
     sigma_b = np.sqrt(var_b)
     # Compute chi^2 = \sum w_i (y_i - (a + b * x_i))^2
     chi2 = np.sum (w * (y-(a+b*x))**2)
-    print(f"a = {a}+/-{sigma_a}")
-    print(f"b = {b}+/-{sigma_b}")
-    print(f"cov(a,b) = {cov_ab}")
+    if verbose:
+        print(f"a = {a}+/-{sigma_a}")
+        print(f"b = {b}+/-{sigma_b}")
+        print(f"cov(a,b) = {cov_ab}")
+        print(f"chi/ndof= {chi2}/{len(x)-2} = {chi2/(len(x)-2)}")
 
     return a,b,sigma_a,sigma_b,cov_ab,chi2
 
